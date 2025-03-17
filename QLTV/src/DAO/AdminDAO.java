@@ -20,7 +20,7 @@ public class AdminDAO implements IAdminDAO {
     }
 
     public void loadAcc() {
-        String query = "SELECT * FROM Account";
+        String query = "SELECT a.AccountId, a.username , a.APass FROM Account a inner join admin ad on a.AccountId = ad.AccountId";
         try (Connection conn = DatabaseConnection.getConnection(); 
              PreparedStatement stmt = conn.prepareStatement(query)) {
             try (ResultSet rs = stmt.executeQuery()) {
@@ -71,7 +71,6 @@ public class AdminDAO implements IAdminDAO {
                 String ADemail = rs.getString("ADemail");
                 String ADaddress = rs.getString("ADaddress");
                 int AccountId = rs.getInt("AccountId");
-
                 Admin admin = new Admin(ADid, Aname, Assn, ADbirthDate, ADgender, ADphoneNumber, ADemail, ADaddress);
                 AdminMap.put(AccountId, admin);
             }

@@ -6,9 +6,8 @@ package ultils;
 
 /**
  *
- * @author NHAT NAM FAN BAC MEO 
+ * @author dangt
  */
-public interface ICustomerValidation {
-    static final String CUSTOMER_ID_REGEX = "C-\\d{3}";
-    static final String CARD_ID_REGEX = "CB-\\d{3}";
+public interface IBookValidation {
+    
 }
