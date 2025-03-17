@@ -15,7 +15,7 @@ public class EmployeeDAO implements IEmployeeDAO {
     private TreeSet<Employee> EList = new TreeSet<>(new EmployeeComparator());
 
     public EmployeeDAO() {
-        getAll();  
+        EList = getAll();  
     }
 
     public TreeSet<Employee> getEList() {
@@ -82,14 +82,14 @@ public class EmployeeDAO implements IEmployeeDAO {
             pstmt.setString(12, emp.getAccountId());
 
             pstmt.executeUpdate();
-            EList.add(emp); // Thêm vào TreeSet sau khi insert DB
+            EList.add(emp); 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
   @Override
-public void update(Employee emp) {
+public void update(Employee emp) { 
     String sql = "UPDATE Employee SET Ename = ?, Essn = ?, EbirthDate = ?, Egender = ?, Ephone = ?, Eemail = ?, Eaddress = ?, Eposition = ?, Esalary = ?, EstartDate = ?, AccountId = ? WHERE Eid = ?";
     try (Connection conn = DatabaseConnection.getConnection();
          PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -108,7 +108,7 @@ public void update(Employee emp) {
 
         pstmt.executeUpdate();
 
-        // Xóa nhân viên cũ khỏi TreeSet
+       
         Employee target = null;
         for (Employee e : EList) {
             if (e.getId().equalsIgnoreCase(emp.getId())) {
@@ -120,7 +120,7 @@ public void update(Employee emp) {
             EList.remove(target);
         }
 
-        // Thêm nhân viên mới vào TreeSet
+       
         EList.add(emp);
 
     } catch (SQLException e) {
@@ -138,7 +138,6 @@ public void update(Employee emp) {
         e.printStackTrace();
     }
 
-    // Cập nhật trong TreeSet
     for (Employee emp : EList) {
         if (emp.getId().equalsIgnoreCase(id)) {
             emp.setName(name);
@@ -328,7 +327,7 @@ public void delete(String id) {
         pstmt.setString(1, id);
         pstmt.executeUpdate();
 
-        // Xóa khỏi TreeSet theo vòng lặp
+      
         Employee target = null;
         for (Employee emp : EList) {
             if (emp.getId().equalsIgnoreCase(id)) {
