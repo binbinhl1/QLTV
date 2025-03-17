@@ -34,6 +34,14 @@ public class Employee extends Person {
         this.position = position;
     }
 
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
     public double getSalary() {
         return salary;
     }
@@ -108,7 +116,8 @@ public class Employee extends Person {
 
     @Override
     public String toString() {
-        return "Employee{" + "position=" + position + ", salary=" + salary + ", startDate=" + startDate + '}';
+        return "Employee{" + "position=" + position + ", salary=" + salary + ", startDate=" + startDate + ", accountId=" + accountId + '}';
     }
 
+   
 }
